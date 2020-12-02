@@ -1,6 +1,7 @@
 #pragma once
-#include "Enemy.h"
 #include <vector>
+#include "Enemy.h"
+#include "Player.h"
 class EnemyGrid
 {
 public:
@@ -13,6 +14,8 @@ public:
 
 	void MoveDown();
 
+	void SetPlayer(Player* player);
+
 private:
 
 	std::vector<Enemy*> m_grid;
@@ -24,5 +27,7 @@ private:
 	int m_speed;
 
 	bool m_moveDownStaged;
+
+	Player* m_player;
 };
 

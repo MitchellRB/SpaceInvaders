@@ -17,6 +17,8 @@ public:
 
 	void SetRect(rl::Rectangle rect);
 
+	Bullet* getBullet();
+
 private:
 
 	int m_position;

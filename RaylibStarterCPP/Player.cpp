@@ -69,3 +69,8 @@ void Player::SetRect(rl::Rectangle rect)
 {
 	m_rect = rect;
 }
+
+Bullet* Player::getBullet()
+{
+	return m_bullet;
+}

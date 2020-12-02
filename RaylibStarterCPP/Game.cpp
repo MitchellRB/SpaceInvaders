@@ -32,6 +32,7 @@ void Game::Initalise()
 
 	grid = new EnemyGrid();
 	grid->Init();
+	grid->SetPlayer(player);
 }
 
 void Game::Run()

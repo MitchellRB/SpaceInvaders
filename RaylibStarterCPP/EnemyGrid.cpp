@@ -2,7 +2,9 @@
 EnemyGrid::EnemyGrid()
 {
 	m_updatePosition = -1;
-	m_speed = 10;
+	m_speed = 5;
+	m_moveDownStaged = false;
+	m_player = nullptr;
 }
 
 EnemyGrid::~EnemyGrid()
@@ -36,12 +38,15 @@ void EnemyGrid::Update()
 		return;
 	}
 
-	// Move across
-	if (m_updatePosition < 1)
+	// Go to the next active enemy
+	do
 	{
-		m_updatePosition = m_grid.size();
-	}
-	m_updatePosition--;
+		if (m_updatePosition < 1)
+		{
+			m_updatePosition = m_grid.size();
+		}
+		m_updatePosition--;
+	} while (m_grid[m_updatePosition]->GetActive() == false);
 	bool reverse = m_grid[m_updatePosition]->Move(m_speed);
 	if (reverse)
 	{
@@ -49,7 +54,7 @@ void EnemyGrid::Update()
 	}
 	for (auto& e : m_grid)
 	{
-		e->Update();
+		e->Update(m_player);
 	}
 }
 
@@ -61,6 +66,11 @@ void EnemyGrid::MoveDown()
 	}
 	m_moveDownStaged = false;
 	m_speed *= -1;
+}
+
+void EnemyGrid::SetPlayer(Player* player)
+{
+	m_player = player;
 }
 
 void EnemyGrid::Draw()
