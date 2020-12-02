@@ -40,7 +40,7 @@ void EnemyGrid::Init()
 void EnemyGrid::Update()
 {
 	// Stop if no enemies remain
-	if (m_activeEnemies > 0)
+	if (m_activeEnemies == 0)
 	{
 		return;
 	}
