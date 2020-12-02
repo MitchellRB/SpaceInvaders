@@ -10,12 +10,13 @@ Player::Player()
 
 Player::~Player()
 {
-
+	delete m_bullet;
 }
 
 void Player::Init()
 {
 	m_position = GetScreenWidth() / 2;
+	m_bullet = new Bullet(-8);
 }
 
 void Player::Update()
@@ -31,15 +32,26 @@ void Player::Update()
 		m_position += moveSpeed;
 	}
 
+	if (IsKeyPressed(KEY_SPACE) && m_bullet->GetActive() == false)
+	{
+		m_bullet->SetActive(true);
+		m_bullet->SetPosition(rl::Vector2(m_position, GetScreenHeight() - m_height - 30));
+
+	}
+
 	// Offset rectangle for drawing
 	m_offsetRect = m_rect;
 	m_offsetRect.x += m_position;
 	m_offsetRect.y += GetScreenHeight() - m_height;
+
+	// Update bullet
+	m_bullet->Update();
 }
 
 void Player::Draw()
 {
 	m_offsetRect.Draw(GREEN);
+	m_bullet->Draw();
 }
 
 void Player::SetBounds(int left, int right)

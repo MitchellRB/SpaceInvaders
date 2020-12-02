@@ -1,5 +1,6 @@
 #pragma once
 #include "raylib-cpp.hpp"
+#include "Bullet.h"
 namespace rl = raylib;
 class Player
 {
@@ -26,6 +27,8 @@ private:
 
 	rl::Rectangle m_rect;
 	rl::Rectangle m_offsetRect;
+
+	Bullet* m_bullet;
 
 	const int moveSpeed = 5;
 };

@@ -18,7 +18,7 @@ Game::~Game()
 
 void Game::Initalise()
 {
-	window = new rl::Window(screenWidth, screenHeight, "Raylib C++");
+	window = new rl::Window(screenWidth, screenHeight, "Space Invaders");
 
 	window->SetTargetFPS(60);
 
