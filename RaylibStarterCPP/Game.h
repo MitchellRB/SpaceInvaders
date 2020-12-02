@@ -24,7 +24,7 @@ private:
 
 	rl::Window* window;
 
-	rl::Color bgColour = RAYWHITE;
+	rl::Color bgColour = BLACK;
 
 	unsigned int screenWidth = 640;
 	unsigned int screenHeight = 480;
