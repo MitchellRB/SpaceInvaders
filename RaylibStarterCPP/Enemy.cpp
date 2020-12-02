@@ -1,12 +1,13 @@
 #include "Enemy.h"
-Enemy::Enemy()
+Enemy::Enemy(EnemyGrid* grid)
 {
+	m_parentGrid = grid;
 	isActive = true;
 }
 
 Enemy::~Enemy()
 {
-
+	
 }
 
 void Enemy::Update(Player* player)
@@ -14,10 +15,11 @@ void Enemy::Update(Player* player)
 	if (!isActive) { return; }
 
 	auto bullet = player->getBullet();
-	if (m_rect.CheckCollision(bullet->GetPosition()))
+	if (bullet->GetActive() == true && m_rect.CheckCollision(bullet->GetPosition()))
 	{
 		isActive = false;
 		bullet->SetActive(false);
+		m_parentGrid->EnemyDeath();
 	}
 }
 

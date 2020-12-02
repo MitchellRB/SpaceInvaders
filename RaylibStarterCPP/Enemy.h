@@ -1,11 +1,16 @@
 #pragma once
 #include "raylib-cpp.hpp"
+
 #include "Player.h"
+#include "EnemyGrid.h"
+
+class EnemyGrid;
+
 namespace rl = raylib;
 class Enemy
 {
 public:
-	Enemy();
+	Enemy(EnemyGrid* grid);
 	~Enemy();
 
 	void Update(Player* player);
@@ -20,6 +25,8 @@ public:
 
 private:
 
+	EnemyGrid* m_parentGrid;
+
 	bool isActive;
 
 	rl::Rectangle m_rect;
@@ -27,4 +34,3 @@ private:
 	const int leftBound = 60;
 	const int rightBound = 60;
 };
-

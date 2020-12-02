@@ -26,8 +26,8 @@ void Game::Initalise()
 
 	player = new Player();
 	player->Init();
-	player->SetHeight(40);
-	player->SetBounds(20, 20);
+	player->SetHeight(50);
+	player->SetBounds(60, 60);
 	player->SetRect({ -10,-5,20,10 });
 
 	grid = new EnemyGrid();

@@ -32,10 +32,10 @@ void Player::Update()
 		m_position += moveSpeed;
 	}
 
-	if (IsKeyPressed(KEY_SPACE) && m_bullet->GetActive() == false)
+	if (IsKeyDown(KEY_SPACE) && m_bullet->GetActive() == false)
 	{
 		m_bullet->SetActive(true);
-		m_bullet->SetPosition(rl::Vector2(m_position, GetScreenHeight() - m_height - 30));
+		m_bullet->SetPosition(rl::Vector2(m_position, GetScreenHeight() - m_height - 15));
 
 	}
 
