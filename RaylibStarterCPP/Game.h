@@ -2,6 +2,8 @@
 
 #include "raylib-cpp.hpp"
 
+#include "Player.h"
+
 namespace rl = raylib;
 
 class Game
@@ -21,6 +23,8 @@ public:
 	void Close();
 
 private:
+
+	Player* player;
 
 	rl::Window* window;
 

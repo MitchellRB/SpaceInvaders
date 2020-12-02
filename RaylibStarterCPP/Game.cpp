@@ -21,6 +21,12 @@ void Game::Initalise()
 	window = new rl::Window(screenWidth, screenHeight, "Raylib C++");
 
 	window->SetTargetFPS(60);
+
+	player = new Player();
+	player->Init();
+	player->SetHeight(40);
+	player->SetBounds(20, 20);
+	player->SetRect({ -10,-5,20,10 });
 }
 
 void Game::Run()
@@ -35,7 +41,7 @@ void Game::Run()
 
 void Game::Update(float deltaTime)
 {
-
+	player->Update();
 }
 
 void Game::Draw()
@@ -44,10 +50,13 @@ void Game::Draw()
 
 	bgColour.ClearBackground();
 
+	player->Draw();
+
 	window->EndDrawing();
 }
 
 void Game::Close()
 {
+	delete player;
 	delete window;
 }
