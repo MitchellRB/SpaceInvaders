@@ -5,11 +5,15 @@ class Colour
 public:
 	static raylib::Color GetColour(int height)
 	{
-		if (height < 80)
+		if (height < 50)
+		{
+			return WHITE;
+		}
+		else if (height < 100)
 		{
 			return RED;
 		}
-		else if (height < 300)
+		else if (height < 340)
 		{
 			return WHITE;
 		}

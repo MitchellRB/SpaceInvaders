@@ -2,6 +2,7 @@
 #include <vector>
 #include "Player.h"
 #include "Enemy.h"
+#include "UFO.h"
 
 class Enemy;
 
@@ -28,8 +29,8 @@ private:
 	const int gridHeight = 5; // 5
 	
 	int m_activeEnemies;
-
 	int m_updatePosition;
+	int m_lowestActive;
 
 	int m_speed;
 
@@ -37,5 +38,7 @@ private:
 
 	Player* m_player;
 
-	int m_lowestActive;
+	UFO* m_secret;
+	int m_secretTimer;
+	const rl::Rectangle secretSpawn = rl::Rectangle{ -40,60,30,10 };
 };

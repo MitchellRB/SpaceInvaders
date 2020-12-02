@@ -5,6 +5,7 @@ EnemyGrid::EnemyGrid()
 	m_speed = 5;
 	m_moveDownStaged = false;
 	m_player = nullptr;
+	m_secret = nullptr;
 	m_activeEnemies = 0;
 	m_lowestActive = 0;
 }
@@ -25,16 +26,21 @@ void EnemyGrid::Init()
 		for (int k = 0; k < gridWidth; k++)
 		{
 			newEnemy = new Enemy(this);
-			newEnemy->SetRect(rl::Rectangle{ (float)(k * 40) + 60, (float)(i * 30) + 80, 20, 10 });
+			newEnemy->SetRect(rl::Rectangle{ (float)(k * 40) + 100, (float)(i * 30) + 120, 20, 10 });
 			m_grid.push_back(newEnemy);
 			m_activeEnemies++;
 		}
 	}
+	m_secret = new UFO();
+	m_secret->SetRect(secretSpawn);
+	m_secret->SetActive(false);
+	m_secretTimer = GetRandomValue(60, 600);
 }
 
 void EnemyGrid::Update()
 {
-	if (m_activeEnemies == 0)
+	// Stop if no enemies remain
+	if (m_activeEnemies > 0)
 	{
 		return;
 	}
@@ -66,13 +72,27 @@ void EnemyGrid::Update()
 	{
 		e->Update(m_player);
 	}
-}
 
+	// Spawn UFO
+	if (m_secretTimer > 0 && m_secret->GetActive() == false)
+	{
+		m_secretTimer--;
+	}
+	else if (m_secretTimer == 0 && m_secret->GetActive() == false)
+	{
+		m_secret->SetActive(true);
+		m_secret->SetRect(secretSpawn);
+		m_secretTimer = GetRandomValue(60, 600);
+	}
+
+	// Move UFO
+	m_secret->Update(m_player);
+}
 void EnemyGrid::MoveDown()
 {
 	for (auto& e : m_grid)
 	{
-		e->GetRect().y += 20;
+		e->GetRect().y += 40;
 	}
 	m_moveDownStaged = false;
 	m_speed *= -1;
@@ -101,4 +121,5 @@ void EnemyGrid::Draw()
 	{
 		e->Draw();
 	}
+	m_secret->Draw();
 }

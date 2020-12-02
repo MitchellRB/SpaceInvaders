@@ -14,6 +14,7 @@ void Enemy::Update(Player* player)
 {
 	if (!isActive) { return; }
 
+	// Check collisions
 	auto bullet = player->getBullet();
 	if (bullet->GetActive() == true && m_rect.CheckCollision(bullet->GetPosition()))
 	{
