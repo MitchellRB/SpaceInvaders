@@ -1,6 +1,7 @@
 #pragma once
 #include "raylib-cpp.hpp"
 #include "Bullet.h"
+#include "Colour.h"
 namespace rl = raylib;
 class Player
 {

@@ -1,4 +1,5 @@
 #include "Bullet.h"
+#include "Colour.h"
 Bullet::Bullet(int speed)
 {
 	m_isActive = false;
@@ -28,7 +29,7 @@ void Bullet::Draw()
 {
 	if (!m_isActive) { return; }
 
-	DrawLine(m_position.x, m_position.y, m_position.x, m_position.y + m_height, WHITE);
+	DrawLine(m_position.x, m_position.y, m_position.x, m_position.y + m_height, Colour::GetColour(m_position.y));
 }
 
 bool Bullet::GetActive()

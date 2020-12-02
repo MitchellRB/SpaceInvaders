@@ -41,7 +41,7 @@ bool Enemy::Move(int speed)
 void Enemy::Draw()
 {
 	if (!isActive) { return; }
-	m_rect.Draw(WHITE);
+	m_rect.Draw(Colour::GetColour(m_rect.y));
 }
 
 rl::Rectangle& Enemy::GetRect()

@@ -50,7 +50,7 @@ void Player::Update()
 
 void Player::Draw()
 {
-	m_offsetRect.Draw(GREEN);
+	m_offsetRect.Draw(Colour::GetColour(GetScreenHeight() - m_height));
 	m_bullet->Draw();
 }
 

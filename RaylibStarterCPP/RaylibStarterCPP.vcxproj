@@ -213,6 +213,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="Colour.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyGrid.h" />
     <ClInclude Include="Game.h" />
