@@ -3,6 +3,7 @@
 #include "raylib-cpp.hpp"
 
 #include "Player.h"
+#include "EnemyGrid.h"
 
 namespace rl = raylib;
 
@@ -25,6 +26,8 @@ public:
 private:
 
 	Player* player;
+
+	EnemyGrid* grid;
 
 	rl::Window* window;
 

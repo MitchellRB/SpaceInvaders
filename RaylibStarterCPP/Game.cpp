@@ -8,7 +8,9 @@ namespace rl = raylib;
 
 Game::Game()
 {
-
+	player = nullptr;
+	grid = nullptr;
+	window = nullptr;
 }
 
 Game::~Game()
@@ -27,6 +29,9 @@ void Game::Initalise()
 	player->SetHeight(40);
 	player->SetBounds(20, 20);
 	player->SetRect({ -10,-5,20,10 });
+
+	grid = new EnemyGrid();
+	grid->Init();
 }
 
 void Game::Run()
@@ -42,6 +47,8 @@ void Game::Run()
 void Game::Update(float deltaTime)
 {
 	player->Update();
+
+	grid->Update();
 }
 
 void Game::Draw()
@@ -52,11 +59,14 @@ void Game::Draw()
 
 	player->Draw();
 
+	grid->Draw();
+
 	window->EndDrawing();
 }
 
 void Game::Close()
 {
-	delete player;
 	delete window;
+	delete player;
+	delete grid;
 }
