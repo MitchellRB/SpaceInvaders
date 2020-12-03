@@ -1,5 +1,5 @@
 #pragma once
-#include "raylib-cpp.hpp"
+#include <raylib-cpp.hpp>
 class Score
 {
 public:

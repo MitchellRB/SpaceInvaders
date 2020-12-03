@@ -1,5 +1,5 @@
 #pragma once
-#include "raylib-cpp.hpp"
+#include <raylib-cpp.hpp>
 
 #include "Player.h"
 #include "EnemyGrid.h"
@@ -11,7 +11,7 @@ namespace rl = raylib;
 class Enemy
 {
 public:
-	Enemy(EnemyGrid* grid);
+	Enemy(EnemyGrid* grid, int ID);
 	~Enemy();
 
 	void Update(Player* player);
@@ -31,7 +31,18 @@ public:
 
 	bool TooLow();
 
+	bool GetLowest() { return m_lowest; }
+	void SetLowest(bool value) { m_lowest = value; }
+
+	int GetID() { return m_ID; }
+
 private:
+	
+	int m_ID;
+
+	bool m_lowest;
+
+	int m_bulletTimer;
 
 	EnemyGrid* m_parentGrid;
 

@@ -51,6 +51,16 @@ void Player::Update()
 
 	// Update bullet
 	m_bullet->Update();
+
+	// Enemy bullet collisions
+	for (auto& bullet : *m_enemyBullets)
+	{
+		if (bullet->GetActive() == true && m_offsetRect.CheckCollision(bullet->GetPosition()))
+		{
+			Kill();
+			bullet->SetActive(false);
+		}
+	}
 }
 
 void Player::Draw()

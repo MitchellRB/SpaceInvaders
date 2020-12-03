@@ -22,10 +22,13 @@ public:
 	void SetPlayer(Player* player);
 
 	void EnemyDeath();
+	void EnemyDeath(Enemy* sender);
 
 	int AliveEnemies() { return m_activeEnemies; }
 
 	void SetScore(Score* score) { m_score = score; }
+
+	void SpawnBullet(Enemy* sender);
 
 private:
 
@@ -54,6 +57,8 @@ private:
 	int m_secretTimer;
 
 	std::vector<rl::Texture2D*> m_enemySprites;
+
+	std::vector<Bullet*> m_bullets;
 
 	const std::string filenames[6] = { "../Resources/Alien11.png", "../Resources/Alien12.png",
 									   "../Resources/Alien21.png", "../Resources/Alien22.png",

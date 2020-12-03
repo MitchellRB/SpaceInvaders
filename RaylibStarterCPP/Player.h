@@ -1,5 +1,6 @@
 #pragma once
-#include "raylib-cpp.hpp"
+#include <vector>
+#include <raylib-cpp.hpp>
 #include "Bullet.h"
 #include "Colour.h"
 namespace rl = raylib;
@@ -25,6 +26,8 @@ public:
 	int GetLives() { return m_lives; }
 	void Kill() { m_lives--; }
 
+	void SetEnemyBullets(std::vector<Bullet*>* bulletPool) { m_enemyBullets = bulletPool; }
+
 private:
 
 	int m_position;
@@ -37,8 +40,10 @@ private:
 	rl::Rectangle m_offsetRect;
 
 	rl::Texture2D* m_sprite;
-
+	
 	Bullet* m_bullet;
+
+	std::vector<Bullet*>* m_enemyBullets;
 
 	int m_lives;
 

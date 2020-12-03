@@ -1,9 +1,12 @@
 #include "Enemy.h"
-Enemy::Enemy(EnemyGrid* grid)
+Enemy::Enemy(EnemyGrid* grid, int ID)
 {
 	m_parentGrid = grid;
 	m_isActive = true;
 	m_usedSprite = true;
+	m_lowest = false;
+	m_bulletTimer = GetRandomValue(300, 1200);
+	m_ID = ID;
 }
 
 Enemy::~Enemy()
@@ -21,7 +24,18 @@ void Enemy::Update(Player* player)
 		m_score->AddScore(m_value);
 		bullet->SetActive(false);
 		m_isActive = false;
-		m_parentGrid->EnemyDeath();
+		m_parentGrid->EnemyDeath(this);
+	}
+
+	// Bullets
+	if (m_lowest)
+	{
+		m_bulletTimer--;
+	}
+	if (m_bulletTimer <= 0)
+	{
+		m_bulletTimer = GetRandomValue(300, 1200);
+		m_parentGrid->SpawnBullet(this);
 	}
 }
 
@@ -44,13 +58,20 @@ bool Enemy::Move(int speed)
 void Enemy::Draw()
 {
 	if (!m_isActive) { return; }
+
+	rl::Color col = Colour::GetColour(m_rect.y);
+	//if (m_lowest)
+	//{
+	//	col = RED;
+	//}
+
 	switch (m_usedSprite)
 	{
 	case true:
-		m_sprites.first->Draw(m_rect.x, m_rect.y, Colour::GetColour(m_rect.y));
+		m_sprites.first->Draw(m_rect.x, m_rect.y, col);
 		break;
 	case false:
-		m_sprites.second->Draw(m_rect.x, m_rect.y, Colour::GetColour(m_rect.y));
+		m_sprites.second->Draw(m_rect.x, m_rect.y, col);
 		break;
 	default:
 		break;

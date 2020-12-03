@@ -1,4 +1,5 @@
 #include "EnemyGrid.h"
+#include <algorithm>
 EnemyGrid::EnemyGrid()
 {
 	m_updatePosition = -1;
@@ -44,9 +45,11 @@ void EnemyGrid::SetupGrid()
 	{
 		for (int k = gridWidth; k > 0; k--)
 		{
-			newEnemy = new Enemy(this);
+			newEnemy = new Enemy(this, m_activeEnemies);
 			newEnemy->SetRect(rl::Rectangle{ (float)(k * 30) + 50, (float)(i * 30) + 120, 20, 10 });
 			newEnemy->SetScore(m_score);
+
+			if (i == gridHeight - 1) { newEnemy->SetLowest(true); }
 
 			// Set sprite pair
 			switch (i % 5)
@@ -144,6 +147,12 @@ void EnemyGrid::Update()
 		}
 	}
 
+	// Move bullets
+	for (auto& b : m_bullets)
+	{
+		b->Update();
+	}
+
 	// Spawn UFO
 	if (m_secretTimer > 0 && m_secret->GetActive() == false && m_activeEnemies > 8)
 	{
@@ -173,6 +182,7 @@ void EnemyGrid::MoveDown()
 void EnemyGrid::SetPlayer(Player* player)
 {
 	m_player = player;
+	m_player->SetEnemyBullets(&m_bullets);
 }
 
 void EnemyGrid::EnemyDeath()
@@ -190,6 +200,29 @@ void EnemyGrid::EnemyDeath()
 	}
 }
 
+void EnemyGrid::EnemyDeath(Enemy* sender)
+{
+	if (sender->GetLowest() == true && sender->GetID() > gridWidth)
+	{
+		int id = sender->GetID();
+		do
+		{
+			id -= gridWidth;
+			m_grid[id]->SetLowest(true);
+		} while (m_grid[id]->GetActive() == false && id > gridWidth);
+	}
+
+	EnemyDeath();
+}
+
+void EnemyGrid::SpawnBullet(Enemy* sender)
+{
+	Bullet* newBullet = new Bullet(6);
+	newBullet->SetActive(true);
+	newBullet->SetPosition(rl::Vector2{ sender->GetRect().x + sender->GetRect().width / 2, sender->GetRect().y + sender->GetRect().height + 5 });
+	m_bullets.push_back(newBullet);
+}
+
 void EnemyGrid::LoadSprites()
 {	for (auto& s : filenames)
 	{
@@ -203,6 +236,10 @@ void EnemyGrid::Draw()
 	for (auto& e : m_grid)
 	{
 		e->Draw();
+	}
+	for (auto& b : m_bullets)
+	{
+		b->Draw();
 	}
 	m_secret->Draw();
 }
