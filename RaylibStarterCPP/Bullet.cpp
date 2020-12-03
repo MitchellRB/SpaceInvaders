@@ -5,7 +5,7 @@ Bullet::Bullet(int speed)
 	m_isActive = false;
 	m_position = rl::Vector2{ 0,0 };
 	m_speed = speed;
-	m_height = 10;
+	m_height = 5;
 }
 
 Bullet::~Bullet()
@@ -19,7 +19,7 @@ void Bullet::Update()
 
 	m_position.y += m_speed;
 
-	if (m_position.y < 0 || m_position.y > GetScreenHeight())
+	if (m_position.y < 40 || m_position.y > GetScreenHeight())
 	{
 		m_isActive = false;
 	}

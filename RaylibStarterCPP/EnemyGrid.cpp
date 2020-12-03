@@ -42,24 +42,28 @@ void EnemyGrid::SetupGrid()
 	Enemy* newEnemy;
 	for (int i = 0; i < gridHeight; i++)
 	{
-		for (int k = 0; k < gridWidth; k++)
+		for (int k = gridWidth; k > 0; k--)
 		{
 			newEnemy = new Enemy(this);
-			newEnemy->SetRect(rl::Rectangle{ (float)(k * 40) + 100, (float)(i * 30) + 120, 20, 10 });
+			newEnemy->SetRect(rl::Rectangle{ (float)(k * 30) + 50, (float)(i * 30) + 120, 20, 10 });
+			newEnemy->SetScore(m_score);
 
 			// Set sprite pair
 			switch (i % 5)
 			{
 			case 0:
 				newEnemy->SetSprites(m_enemySprites[4], m_enemySprites[5]);
+				newEnemy->SetValue(50);
 				break;
 			case 1:
 			case 2:
 				newEnemy->SetSprites(m_enemySprites[2], m_enemySprites[3]);
+				newEnemy->SetValue(30);
 				break;
 			case 3:
 			case 4:
 				newEnemy->SetSprites(m_enemySprites[0], m_enemySprites[1]);
+				newEnemy->SetValue(10);
 				break;
 			default:
 				break;
@@ -78,6 +82,8 @@ void EnemyGrid::SetupUFO()
 	m_secret->SetActive(false);
 	m_secretTimer = GetRandomValue(60, 600);
 	m_secret->SetSprite("../Resources/UFO.png");
+	m_secret->SetScore(m_score);
+	m_secret->SetValue(200);
 }
 
 void EnemyGrid::Update()
@@ -119,7 +125,7 @@ void EnemyGrid::Update()
 		}
 		if (m_updatePosition == m_lowestActive)
 		{
-			m_waitTime = 2;
+			m_waitTime = 1;
 		}
 	}
 

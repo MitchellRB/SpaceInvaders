@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "UFO.h"
+#include "Score.h"
 
 class Enemy;
 
@@ -24,6 +25,8 @@ public:
 
 	int AliveEnemies() { return m_activeEnemies; }
 
+	void SetScore(Score* score) { m_score = score; }
+
 private:
 
 	void LoadSprites();
@@ -31,7 +34,7 @@ private:
 	void SetupUFO();
 
 	std::vector<Enemy*> m_grid;
-	const int gridWidth = 11; // 11
+	const int gridWidth = 15; // 11
 	const int gridHeight = 5; // 5
 	
 	int m_activeEnemies;
@@ -44,6 +47,8 @@ private:
 	bool m_moveDownStaged;
 
 	Player* m_player;
+
+	Score* m_score;
 
 	UFO* m_secret;
 	int m_secretTimer;

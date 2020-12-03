@@ -18,8 +18,9 @@ void Enemy::Update(Player* player)
 	auto bullet = player->getBullet();
 	if (bullet->GetActive() == true && m_rect.CheckCollision(bullet->GetPosition()))
 	{
-		m_isActive = false;
+		m_score->AddScore(m_value);
 		bullet->SetActive(false);
+		m_isActive = false;
 		m_parentGrid->EnemyDeath();
 	}
 }

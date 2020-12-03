@@ -15,7 +15,7 @@ Game::Game()
 
 Game::~Game()
 {
-
+	
 }
 
 void Game::Initalise()
@@ -26,14 +26,18 @@ void Game::Initalise()
 
 	player = new Player();
 	player->Init();
-	player->SetHeight(50);
+	player->SetHeight(40);
 	player->SetBounds(60, 60);
 	player->SetRect({ -10,-5,20,10 });
 	player->SetSprite("../Resources/Player.png");
 
+	score = new Score();
+
 	grid = new EnemyGrid();
+	grid->SetScore(score);
 	grid->Init();
 	grid->SetPlayer(player);
+
 }
 
 void Game::Run()
@@ -57,6 +61,7 @@ void Game::Update(float deltaTime)
 		// Reset enemies
 		delete grid;
 		grid = new EnemyGrid();
+		grid->SetScore(score);
 		grid->Init();
 		grid->SetPlayer(player);
 	}
@@ -72,6 +77,8 @@ void Game::Draw()
 
 	grid->Draw();
 
+	score->Draw();
+
 	window->EndDrawing();
 }
 
@@ -80,4 +87,5 @@ void Game::Close()
 	delete window;
 	delete player;
 	delete grid;
+	delete score;
 }

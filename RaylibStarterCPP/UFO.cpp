@@ -3,6 +3,7 @@
 
 UFO::UFO()
 {
+
 }
 
 UFO::~UFO()
@@ -29,6 +30,7 @@ void UFO::Update(Player* player)
 	auto bullet = player->getBullet();
 	if (bullet->GetActive() == true && m_rect.CheckCollision(bullet->GetPosition()))
 	{
+		m_score->AddScore(m_value);
 		m_isActive = false;
 		bullet->SetActive(false);
 	}

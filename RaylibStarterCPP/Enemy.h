@@ -3,6 +3,7 @@
 
 #include "Player.h"
 #include "EnemyGrid.h"
+#include "Score.h"
 
 class EnemyGrid;
 
@@ -25,9 +26,15 @@ public:
 
 	void SetSprites(rl::Texture2D* spriteA, rl::Texture2D* spriteB);
 
+	void SetScore(Score* score) { m_score = score; }
+	void SetValue(int value) { m_value = value; }
+
 private:
 
 	EnemyGrid* m_parentGrid;
+
+	int m_value;
+	Score* m_score;
 
 	bool m_isActive;
 

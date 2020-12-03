@@ -29,6 +29,8 @@ private:
 
 	EnemyGrid* grid;
 
+	Score* score;
+
 	rl::Window* window;
 
 	rl::Color bgColour = BLACK;
