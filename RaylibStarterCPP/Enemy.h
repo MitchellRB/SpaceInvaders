@@ -29,7 +29,7 @@ public:
 	void SetScore(Score* score) { m_score = score; }
 	void SetValue(int value) { m_value = value; }
 
-	bool TooLow() { return m_rect.y > 400; }
+	bool TooLow();
 
 private:
 

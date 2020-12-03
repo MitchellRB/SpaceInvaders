@@ -72,3 +72,12 @@ void Enemy::SetSprites(rl::Texture2D* spriteA, rl::Texture2D* spriteB)
 	m_sprites.first = spriteA;
 	m_sprites.second = spriteB;
 }
+
+bool Enemy::TooLow()
+{
+	if (m_isActive && m_rect.y > 400)
+	{
+		return true;
+	}
+	return false;
+}
