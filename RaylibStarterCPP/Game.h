@@ -7,6 +7,13 @@
 
 namespace rl = raylib;
 
+enum class State
+{
+	Menu,
+	Play,
+	GameOver
+};
+
 class Game
 {
 public:
@@ -14,6 +21,9 @@ public:
 	~Game();
 
 	void Initalise();
+
+	void StartGame();
+	void StopGame();
 
 	void Run();
 
@@ -24,6 +34,8 @@ public:
 	void Close();
 
 private:
+
+	State gameState;
 
 	Player* player;
 

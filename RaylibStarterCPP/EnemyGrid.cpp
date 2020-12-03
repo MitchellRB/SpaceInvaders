@@ -125,13 +125,19 @@ void EnemyGrid::Update()
 		}
 		if (m_updatePosition == m_lowestActive)
 		{
-			m_waitTime = 1;
+			m_waitTime = 0;
 		}
 	}
 
 	for (auto& e : m_grid)
 	{
 		e->Update(m_player);
+		if (e->TooLow())
+		{
+			m_player->Kill();
+			m_activeEnemies = 0;
+			break;
+		}
 		if (m_activeEnemies == 0)
 		{
 			break;

@@ -34,7 +34,7 @@ private:
 	void SetupUFO();
 
 	std::vector<Enemy*> m_grid;
-	const int gridWidth = 15; // 11
+	const int gridWidth = 15; // 15
 	const int gridHeight = 5; // 5
 	
 	int m_activeEnemies;

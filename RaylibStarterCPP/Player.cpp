@@ -1,4 +1,5 @@
 #include "Player.h"
+#include <sstream>
 
 Player::Player()
 {
@@ -6,11 +7,14 @@ Player::Player()
 	m_leftBound = 0;
 	m_rightBound = 0;
 	m_position = 0;
+	m_lives = 3;
 }
 
 Player::~Player()
 {
+	if (m_bullet)
 	delete m_bullet;
+	if (m_sprite)
 	delete m_sprite;
 }
 
@@ -53,6 +57,13 @@ void Player::Draw()
 {
 	m_sprite->Draw(m_offsetRect.x, m_offsetRect.y, Colour::GetColour(GetScreenHeight() - m_height));
 	m_bullet->Draw();
+	std::stringstream ss;
+	ss << m_lives;
+	DrawText(ss.str().c_str(), 15, GetScreenHeight() - 20, 14, WHITE);
+	for (int i = 1; i < m_lives; i++)
+	{
+		m_sprite->Draw(25 + 25 * i, GetScreenHeight() - 20, GREEN);
+	}
 }
 
 void Player::SetBounds(int left, int right)

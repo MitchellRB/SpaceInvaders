@@ -22,6 +22,9 @@ public:
 
 	void SetSprite(const char* filename);
 
+	int GetLives() { return m_lives; }
+	void Kill() { m_lives--; }
+
 private:
 
 	int m_position;
@@ -36,6 +39,8 @@ private:
 	rl::Texture2D* m_sprite;
 
 	Bullet* m_bullet;
+
+	int m_lives;
 
 	const int moveSpeed = 5;
 };
