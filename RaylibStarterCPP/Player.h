@@ -20,6 +20,8 @@ public:
 
 	Bullet* getBullet();
 
+	void SetSprite(const char* filename);
+
 private:
 
 	int m_position;
@@ -30,6 +32,8 @@ private:
 
 	rl::Rectangle m_rect;
 	rl::Rectangle m_offsetRect;
+
+	rl::Texture2D* m_sprite;
 
 	Bullet* m_bullet;
 

@@ -7,6 +7,7 @@ UFO::UFO()
 
 UFO::~UFO()
 {
+	m_sprite.Unload();
 }
 
 void UFO::Update(Player* player)
@@ -38,5 +39,11 @@ void UFO::Draw()
 {
 	if (!m_isActive) { return; }
 
-	m_rect.Draw(Colour::GetColour(m_rect.y));
+	//m_rect.Draw(Colour::GetColour(m_rect.y));
+	m_sprite.Draw(m_rect.x, m_rect.y, Colour::GetColour(m_rect.y));
+}
+
+void UFO::SetSprite(const char* filename)
+{
+	m_sprite.Load(filename);
 }

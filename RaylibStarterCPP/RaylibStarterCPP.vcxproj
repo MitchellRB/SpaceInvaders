@@ -158,6 +158,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)Raygui\src;$(SolutionDir)Raylib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -189,6 +190,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)Raygui\src;$(SolutionDir)Raylib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

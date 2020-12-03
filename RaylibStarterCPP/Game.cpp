@@ -29,6 +29,7 @@ void Game::Initalise()
 	player->SetHeight(50);
 	player->SetBounds(60, 60);
 	player->SetRect({ -10,-5,20,10 });
+	player->SetSprite("../Resources/Player.png");
 
 	grid = new EnemyGrid();
 	grid->Init();
@@ -50,6 +51,15 @@ void Game::Update(float deltaTime)
 	player->Update();
 
 	grid->Update();
+
+	if (grid->AliveEnemies() == 0)
+	{
+		// Reset enemies
+		delete grid;
+		grid = new EnemyGrid();
+		grid->Init();
+		grid->SetPlayer(player);
+	}
 }
 
 void Game::Draw()

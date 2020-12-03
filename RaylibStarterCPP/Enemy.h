@@ -20,16 +20,21 @@ public:
 	rl::Rectangle& GetRect();
 	void SetRect(rl::Rectangle rect);
 
-	bool GetActive() { return isActive; }
-	void SetActive(bool value) { isActive = value; }
+	bool GetActive() { return m_isActive; }
+	void SetActive(bool value) { m_isActive = value; }
+
+	void SetSprites(rl::Texture2D* spriteA, rl::Texture2D* spriteB);
 
 private:
 
 	EnemyGrid* m_parentGrid;
 
-	bool isActive;
+	bool m_isActive;
 
 	rl::Rectangle m_rect;
+
+	std::pair<rl::Texture2D*, rl::Texture2D*> m_sprites;
+	bool m_usedSprite;
 
 	const int leftBound = 60;
 	const int rightBound = 60;

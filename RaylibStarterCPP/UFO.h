@@ -17,10 +17,14 @@ public:
 	rl::Rectangle& GetRect() { return m_rect; }
 	void SetRect(rl::Rectangle rect) { m_rect = rect; }
 
+	void SetSprite(const char* filename);
+
 private:
 
 	bool m_isActive;
 
 	rl::Rectangle m_rect;
+
+	rl::Texture2D m_sprite;
 };
 

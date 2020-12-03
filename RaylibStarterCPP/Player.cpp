@@ -11,6 +11,7 @@ Player::Player()
 Player::~Player()
 {
 	delete m_bullet;
+	delete m_sprite;
 }
 
 void Player::Init()
@@ -50,7 +51,8 @@ void Player::Update()
 
 void Player::Draw()
 {
-	m_offsetRect.Draw(Colour::GetColour(GetScreenHeight() - m_height));
+	m_sprite->Draw(m_offsetRect.x, m_offsetRect.y, Colour::GetColour(GetScreenHeight() - m_height));
+	//m_offsetRect.Draw(Colour::GetColour(GetScreenHeight() - m_height));
 	m_bullet->Draw();
 }
 
@@ -73,4 +75,9 @@ void Player::SetRect(rl::Rectangle rect)
 Bullet* Player::getBullet()
 {
 	return m_bullet;
+}
+
+void Player::SetSprite(const char* filename)
+{
+	m_sprite = new rl::Texture2D(filename);
 }
