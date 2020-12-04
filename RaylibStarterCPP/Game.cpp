@@ -45,6 +45,14 @@ void Game::StartGame()
 	grid->SetScore(score);
 	grid->Init();
 	grid->SetPlayer(player);
+	
+	for (int i = 0; i < 4; i++)
+	{
+		Barrier* newBarrier = new Barrier(i * 120 + 100);
+		newBarrier->SetBullets(player->getBullet(), grid->GetBullets());
+		newBarrier->SetGrid(grid->GetGrid());
+		barriers.push_back(newBarrier);
+	}
 }
 
 void Game::StopGame()
@@ -79,6 +87,11 @@ void Game::Update(float deltaTime)
 		player->Update();
 
 		grid->Update();
+
+		for (auto& b : barriers)
+		{
+			b->Update();
+		}
 
 		if (grid->AliveEnemies() == 0)
 		{
@@ -125,6 +138,11 @@ void Game::Draw()
 		grid->Draw();
 
 		score->Draw();
+
+		for (auto& b : barriers)
+		{
+			b->Draw();
+		}
 	}
 	else if (gameState == State::GameOver)
 	{
@@ -152,4 +170,8 @@ void Game::Close()
 	delete grid;
 	if (score)
 	delete score;
+	for (auto& b : barriers)
+	{
+		delete b;
+	}
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <list>
 #include "Player.h"
 #include "Enemy.h"
 #include "UFO.h"
@@ -30,6 +31,10 @@ public:
 
 	void SpawnBullet(Enemy* sender);
 
+	std::list<Bullet*>* GetBullets() { return &m_bullets; }
+
+	std::vector<Enemy*>* GetGrid() { return &m_grid; }
+
 private:
 
 	void LoadSprites();
@@ -58,7 +63,7 @@ private:
 
 	std::vector<rl::Texture2D*> m_enemySprites;
 
-	std::vector<Bullet*> m_bullets;
+	std::list<Bullet*> m_bullets;
 
 	const std::string filenames[6] = { "../Resources/Alien11.png", "../Resources/Alien12.png",
 									   "../Resources/Alien21.png", "../Resources/Alien22.png",

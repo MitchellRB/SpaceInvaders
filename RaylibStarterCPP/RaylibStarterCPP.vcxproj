@@ -209,6 +209,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Barrier.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyGrid.cpp" />
@@ -219,6 +220,7 @@
     <ClCompile Include="UFO.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Barrier.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Colour.h" />
     <ClInclude Include="Enemy.h" />

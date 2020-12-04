@@ -4,6 +4,7 @@
 
 #include "Player.h"
 #include "EnemyGrid.h"
+#include "Barrier.h"
 
 namespace rl = raylib;
 
@@ -46,6 +47,8 @@ private:
 	rl::Window* window;
 
 	rl::Color bgColour = BLACK;
+
+	std::vector<Barrier*> barriers;
 
 	unsigned int screenWidth = 640;
 	unsigned int screenHeight = 480;

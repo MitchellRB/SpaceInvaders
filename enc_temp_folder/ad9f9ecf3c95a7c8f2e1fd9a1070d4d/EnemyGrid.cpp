@@ -56,12 +56,12 @@ void EnemyGrid::SetupGrid()
 			{
 			case 0:
 				newEnemy->SetSprites(m_enemySprites[4], m_enemySprites[5]);
-				newEnemy->SetValue(30);
+				newEnemy->SetValue(50);
 				break;
 			case 1:
 			case 2:
 				newEnemy->SetSprites(m_enemySprites[2], m_enemySprites[3]);
-				newEnemy->SetValue(20);
+				newEnemy->SetValue(30);
 				break;
 			case 3:
 			case 4:
@@ -86,7 +86,7 @@ void EnemyGrid::SetupUFO()
 	m_secretTimer = GetRandomValue(60, 600);
 	m_secret->SetSprite("../Resources/UFO.png");
 	m_secret->SetScore(m_score);
-	m_secret->SetValue(100);
+	m_secret->SetValue(200);
 }
 
 void EnemyGrid::Update()

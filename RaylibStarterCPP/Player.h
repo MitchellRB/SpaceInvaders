@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <list>
 #include <raylib-cpp.hpp>
 #include "Bullet.h"
 #include "Colour.h"
@@ -26,7 +27,7 @@ public:
 	int GetLives() { return m_lives; }
 	void Kill() { m_lives--; }
 
-	void SetEnemyBullets(std::vector<Bullet*>* bulletPool) { m_enemyBullets = bulletPool; }
+	void SetEnemyBullets(std::list<Bullet*>* bulletPool) { m_enemyBullets = bulletPool; }
 
 private:
 
@@ -43,7 +44,7 @@ private:
 	
 	Bullet* m_bullet;
 
-	std::vector<Bullet*>* m_enemyBullets;
+	std::list<Bullet*>* m_enemyBullets;
 
 	int m_lives;
 
