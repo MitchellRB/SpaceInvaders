@@ -124,7 +124,6 @@ void Game::Update(float deltaTime)
 	{
 		if (IsKeyPressed(KEY_ENTER))
 		{
-			//StopGame();
 			gameState = State::Menu;
 			return;
 		}
@@ -158,7 +157,8 @@ void Game::Draw()
 	}
 	else if (gameState == State::GameOver)
 	{
-		DrawText("Game over", 300, 200, 14, RED);
+		score->Draw();
+		DrawText("Game over", 290, 100, 20, RED);
 	}
 
 	/*for (int i = 0; i < GetScreenHeight(); i += 20)
