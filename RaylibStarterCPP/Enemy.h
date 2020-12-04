@@ -25,7 +25,7 @@ public:
 	bool GetActive() { return m_isActive; }
 	void SetActive(bool value) { m_isActive = value; }
 
-	void SetSprites(rl::Texture2D* spriteA, rl::Texture2D* spriteB);
+	void SetSprites(rl::Texture2D* spriteA, rl::Texture2D* spriteB, rl::Texture2D* death);
 
 	void SetScore(Score* score) { m_score = score; }
 	void SetValue(int value) { m_value = value; }
@@ -55,7 +55,9 @@ private:
 	rl::Rectangle m_rect;
 
 	std::pair<rl::Texture2D*, rl::Texture2D*> m_sprites;
-	bool m_usedSprite;
+	rl::Texture2D* m_deathSprite;
+	rl::Texture2D* m_usedSprite;
+	int m_deathTime;
 
 	const int leftBound = 60;
 	const int rightBound = 60;

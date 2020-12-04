@@ -21,7 +21,7 @@ public:
 	rl::Rectangle& GetRect() { return m_rect; }
 	void SetRect(rl::Rectangle rect) { m_rect = rect; }
 
-	void SetSprite(const char* filename);
+	void SetSprites(const char* normal, const char* death);
 
 	void SetScore(Score* score) { m_score = score; }
 	void SetValue(int value) { m_value = value; }
@@ -36,5 +36,8 @@ private:
 	rl::Rectangle m_rect;
 
 	rl::Texture2D m_sprite;
+	rl::Texture2D m_deathSprite;
+
+	int m_deathTimer;
 };
 

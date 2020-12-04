@@ -55,17 +55,17 @@ void EnemyGrid::SetupGrid()
 			switch (i % 5)
 			{
 			case 0:
-				newEnemy->SetSprites(m_enemySprites[4], m_enemySprites[5]);
+				newEnemy->SetSprites(m_enemySprites[4], m_enemySprites[5], m_enemySprites[6]);
 				newEnemy->SetValue(30);
 				break;
 			case 1:
 			case 2:
-				newEnemy->SetSprites(m_enemySprites[2], m_enemySprites[3]);
+				newEnemy->SetSprites(m_enemySprites[2], m_enemySprites[3], m_enemySprites[6]);
 				newEnemy->SetValue(20);
 				break;
 			case 3:
 			case 4:
-				newEnemy->SetSprites(m_enemySprites[0], m_enemySprites[1]);
+				newEnemy->SetSprites(m_enemySprites[0], m_enemySprites[1], m_enemySprites[6]);
 				newEnemy->SetValue(10);
 				break;
 			default:
@@ -84,7 +84,7 @@ void EnemyGrid::SetupUFO()
 	m_secret->SetRect(secretSpawn);
 	m_secret->SetActive(false);
 	m_secretTimer = GetRandomValue(60, 600);
-	m_secret->SetSprite("../Resources/UFO.png");
+	m_secret->SetSprites("../Resources/UFO.png", "../Resources/AlienDeath.png");
 	m_secret->SetScore(m_score);
 	m_secret->SetValue(100);
 }

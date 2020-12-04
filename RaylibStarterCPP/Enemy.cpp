@@ -3,7 +3,6 @@ Enemy::Enemy(EnemyGrid* grid, int ID)
 {
 	m_parentGrid = grid;
 	m_isActive = true;
-	m_usedSprite = true;
 	m_lowest = false;
 	m_bulletTimer = GetRandomValue(minTime, maxTime);
 	m_ID = ID;
@@ -15,7 +14,12 @@ Enemy::~Enemy()
 
 void Enemy::Update(Player* player)
 {
-	if (!m_isActive) { return; }
+	if (!m_isActive)
+	{
+		if (m_deathTime > 0)
+			m_deathTime--;
+		return;
+	}
 
 	// Check collisions
 	auto bullet = player->getBullet();
@@ -25,6 +29,8 @@ void Enemy::Update(Player* player)
 		bullet->SetActive(false);
 		m_isActive = false;
 		m_parentGrid->EnemyDeath(this);
+		m_deathTime = 15;
+		m_usedSprite = m_deathSprite;
 	}
 
 	// Bullets
@@ -44,7 +50,16 @@ bool Enemy::Move(int speed)
 	if (!m_isActive) { return false; }
 
 	m_rect.x += speed;
-	m_usedSprite = !m_usedSprite;
+	
+	if (m_usedSprite == m_sprites.first)
+	{
+		m_usedSprite = m_sprites.second;
+	}
+	else
+	{
+		m_usedSprite = m_sprites.first;
+	}
+
 	if ((speed < 0 && m_rect.x < leftBound) ||
 		(speed > 0 && m_rect.x > GetScreenWidth() - rightBound))
 	{
@@ -57,25 +72,14 @@ bool Enemy::Move(int speed)
 
 void Enemy::Draw()
 {
-	if (!m_isActive) { return; }
+	if (!m_isActive && m_deathTime == 0) { return; }
 
 	rl::Color col = Colour::GetColour(m_rect.y);
 	//if (m_lowest)
 	//{
 	//	col = RED;
 	//}
-
-	switch (m_usedSprite)
-	{
-	case true:
-		m_sprites.first->Draw(m_rect.x, m_rect.y, col);
-		break;
-	case false:
-		m_sprites.second->Draw(m_rect.x, m_rect.y, col);
-		break;
-	default:
-		break;
-	}
+	m_usedSprite->Draw(m_rect.x, m_rect.y, col);
 }
 
 rl::Rectangle& Enemy::GetRect()
@@ -88,10 +92,12 @@ void Enemy::SetRect(rl::Rectangle rect)
 	m_rect = rect;
 }
 
-void Enemy::SetSprites(rl::Texture2D* spriteA, rl::Texture2D* spriteB)
+void Enemy::SetSprites(rl::Texture2D* spriteA, rl::Texture2D* spriteB, rl::Texture2D* death)
 {
 	m_sprites.first = spriteA;
 	m_sprites.second = spriteB;
+	m_deathSprite = death;
+	m_usedSprite = m_sprites.first;
 }
 
 bool Enemy::TooLow()

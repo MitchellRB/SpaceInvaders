@@ -71,9 +71,9 @@ private:
 
 	std::list<Bullet*> m_bullets;
 
-	const std::string filenames[6] = { "../Resources/Alien11.png", "../Resources/Alien12.png",
+	const std::string filenames[7] = { "../Resources/Alien11.png", "../Resources/Alien12.png",
 									   "../Resources/Alien21.png", "../Resources/Alien22.png",
-									   "../Resources/Alien31.png", "../Resources/Alien32.png" };
+									   "../Resources/Alien31.png", "../Resources/Alien32.png", "../Resources/AlienDeath.png" };
 
 	const rl::Rectangle secretSpawn = rl::Rectangle{ -40,60,30,10 };
 };
