@@ -91,6 +91,12 @@ void EnemyGrid::SetupUFO()
 
 void EnemyGrid::Update()
 {
+	if (m_waitTime > 0)
+	{
+		m_waitTime--;
+		return;
+	}
+
 	// Stop if no enemies remain
 	if (m_activeEnemies == 0)
 	{
@@ -173,6 +179,7 @@ void EnemyGrid::MoveDown()
 {
 	for (auto& e : m_grid)
 	{
+		if (e->GetActive() == true)
 		e->GetRect().y += 20;
 	}
 	m_moveDownStaged = false;

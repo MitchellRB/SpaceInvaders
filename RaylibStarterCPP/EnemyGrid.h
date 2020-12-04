@@ -7,6 +7,8 @@
 #include "Score.h"
 
 class Enemy;
+class Player;
+class UFO;
 
 class EnemyGrid
 {
@@ -35,6 +37,8 @@ public:
 
 	std::vector<Enemy*>* GetGrid() { return &m_grid; }
 
+	void Wait(int time) { m_waitTime = time; }
+
 private:
 
 	void LoadSprites();
@@ -51,6 +55,8 @@ private:
 	int m_waitTime;
 
 	int m_speed;
+
+	int m_waitTimer;
 
 	bool m_moveDownStaged;
 

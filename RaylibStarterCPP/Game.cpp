@@ -40,12 +40,13 @@ void Game::StartGame()
 	player->SetHeight(40);
 	player->SetBounds(60, 60);
 	player->SetRect({ -10,-5,20,10 });
-	player->SetSprite("../Resources/Player.png");
+	player->SetSprites("../Resources/Player.png", "../Resources/PlayerDeath.png");
 
 	grid = new EnemyGrid();
 	grid->SetScore(score);
 	grid->Init();
 	grid->SetPlayer(player);
+	player->SetGrid(grid);
 	
 	for (int i = 0; i < 4; i++)
 	{

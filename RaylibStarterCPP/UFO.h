@@ -3,6 +3,9 @@
 #include "Player.h"
 #include "Score.h"
 namespace rl = raylib;
+
+class Player;
+
 class UFO
 {
 public:

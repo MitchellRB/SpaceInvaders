@@ -8,14 +8,17 @@ Player::Player()
 	m_rightBound = 0;
 	m_position = 0;
 	m_lives = 3;
+	m_deathTimer = -1;
 }
 
 Player::~Player()
 {
 	if (m_bullet)
-	delete m_bullet;
+		delete m_bullet;
 	if (m_sprite)
-	delete m_sprite;
+		delete m_sprite;
+	if (m_deathSprite)
+		delete m_deathSprite;
 }
 
 void Player::Init()
@@ -26,6 +29,16 @@ void Player::Init()
 
 void Player::Update()
 {
+	if (m_deathTimer > 0)
+	{
+		m_deathTimer--;
+		return;
+	}
+	else if (m_deathTimer == 0)
+	{
+		m_activeSprite = m_sprite;
+	}
+
 	// Player input
 	if (IsKeyDown(KEY_A) && m_position > m_leftBound)
 	{
@@ -65,7 +78,7 @@ void Player::Update()
 
 void Player::Draw()
 {
-	m_sprite->Draw(m_offsetRect.x, m_offsetRect.y, Colour::GetColour(GetScreenHeight() - m_height));
+	m_activeSprite->Draw(m_offsetRect.x, m_offsetRect.y, Colour::GetColour(GetScreenHeight() - m_height));
 	m_bullet->Draw();
 	std::stringstream ss;
 	ss << m_lives;
@@ -97,7 +110,17 @@ Bullet* Player::getBullet()
 	return m_bullet;
 }
 
-void Player::SetSprite(const char* filename)
+void Player::SetSprites(const char* normal, const char* death)
 {
-	m_sprite = new rl::Texture2D(filename);
+	m_sprite = new rl::Texture2D(normal);
+	m_deathSprite = new rl::Texture2D(death);
+	m_activeSprite = m_sprite;
+}
+
+void Player::Kill()
+{
+	m_lives--;
+	m_activeSprite = m_deathSprite;
+	m_deathTimer = 45;
+	m_grid->Wait(45);
 }

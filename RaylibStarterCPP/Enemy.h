@@ -6,6 +6,7 @@
 #include "Score.h"
 
 class EnemyGrid;
+class Player;
 
 namespace rl = raylib;
 class Enemy
