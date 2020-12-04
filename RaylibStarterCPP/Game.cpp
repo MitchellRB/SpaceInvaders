@@ -17,7 +17,7 @@ Game::Game()
 
 Game::~Game()
 {
-	
+
 }
 
 void Game::Initalise()
@@ -28,8 +28,9 @@ void Game::Initalise()
 
 	gameState = State::Menu;
 
-	score = new Score();
+	splashImage.Load("../Resources/Splash.png");
 
+	score = new Score();
 }
 
 void Game::StartGame()
@@ -57,8 +58,16 @@ void Game::StartGame()
 
 void Game::StopGame()
 {
-	delete player;
-	delete grid;
+	if (player)
+	{
+		delete player;
+		player = nullptr;
+	}
+	if (grid)
+	{
+		delete grid;
+		grid = nullptr;
+	}
 }
 
 void Game::Run()
@@ -84,8 +93,10 @@ void Game::Update(float deltaTime)
 	}
 	else if (gameState == State::Play)
 	{
+		if (player)
 		player->Update();
 
+		if (grid)
 		grid->Update();
 
 		for (auto& b : barriers)
@@ -106,6 +117,7 @@ void Game::Update(float deltaTime)
 		{
 			gameState = State::GameOver;
 			StopGame();
+			return;
 		}
 	}
 	else if (gameState == State::GameOver)
@@ -117,8 +129,6 @@ void Game::Update(float deltaTime)
 			return;
 		}
 	}
-
-	DrawFPS(0, 0);
 }
 
 void Game::Draw()
@@ -129,12 +139,14 @@ void Game::Draw()
 
 	if (gameState == State::Menu)
 	{
-		DrawText("Press ENTER to play", 130, 200, 30, Colour::GetColour(300));
+		splashImage.Draw(0, 0);
 	}
 	else if (gameState == State::Play)
 	{
+		if (player)
 		player->Draw();
 
+		if (grid)
 		grid->Draw();
 
 		score->Draw();
@@ -146,7 +158,7 @@ void Game::Draw()
 	}
 	else if (gameState == State::GameOver)
 	{
-		DrawText("Game over", 200, 200, 10, RED);
+		DrawText("Game over", 300, 200, 14, RED);
 	}
 
 	/*for (int i = 0; i < GetScreenHeight(); i += 20)
@@ -174,4 +186,5 @@ void Game::Close()
 	{
 		delete b;
 	}
+	splashImage.Unload();
 }

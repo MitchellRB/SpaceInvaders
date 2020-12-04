@@ -58,4 +58,7 @@ private:
 
 	const int leftBound = 60;
 	const int rightBound = 60;
+
+	const int minTime = 300;
+	const int maxTime = 900;
 };

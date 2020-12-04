@@ -5,7 +5,7 @@ Enemy::Enemy(EnemyGrid* grid, int ID)
 	m_isActive = true;
 	m_usedSprite = true;
 	m_lowest = false;
-	m_bulletTimer = GetRandomValue(300, 1200);
+	m_bulletTimer = GetRandomValue(minTime, maxTime);
 	m_ID = ID;
 }
 
@@ -34,7 +34,7 @@ void Enemy::Update(Player* player)
 	}
 	if (m_bulletTimer <= 0)
 	{
-		m_bulletTimer = GetRandomValue(300, 1200);
+		m_bulletTimer = GetRandomValue(minTime, maxTime);
 		m_parentGrid->SpawnBullet(this);
 	}
 }

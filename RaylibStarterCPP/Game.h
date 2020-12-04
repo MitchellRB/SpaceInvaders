@@ -50,6 +50,8 @@ private:
 
 	std::vector<Barrier*> barriers;
 
+	rl::Texture2D splashImage;
+
 	unsigned int screenWidth = 640;
 	unsigned int screenHeight = 480;
 };
